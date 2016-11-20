@@ -16,8 +16,8 @@
       {"name": "Project Site", "url": "https://github.com/BTplc/grafana-plugins"}
     ],
     "screenshots": [
-      {"name": "Trend Box", "path": "src/img/trend_box.png"},
-      {"name": "Trend Box Options", "path": "src/img/trend_box_options.png"}
+      {"name": "Trend Box", "path": "img/trend_box.png"},
+      {"name": "Trend Box Options", "path": "img/trend_box_options.png"}
     ],
     "logos": {
       "small": "img/logo.jpg"

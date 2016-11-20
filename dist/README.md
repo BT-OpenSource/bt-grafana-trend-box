@@ -2,7 +2,7 @@
 
 A trend box panel for [Grafana](http://grafana.org/).
 
-![Trend Box Panel](https://raw.githubusercontent.com/BTplc/grafana-plugins/master/btplc-trend-box-panel/src/img/trend_box.png)
+![Trend Box Panel](https://raw.githubusercontent.com/BTplc/grafana-trend-box/master/src/img/trend_box.png)
 
 ## Overview
 
@@ -23,6 +23,9 @@ Now do this...
 
     # Install development packages
     npm install
+
+    # Install the grunt-cli
+    sudo npm install -g grunt-cli
 
     # Compile into dist/
     grunt
