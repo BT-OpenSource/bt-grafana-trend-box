@@ -6,7 +6,7 @@ import {Builder} from './util/builder'
 import {Presenter} from './util/presenter'
 
 const panelDefaults = {
-  defaultColour: 'rgb(117, 117, 117)',
+  defaultColor: 'rgb(117, 117, 117)',
   displayValue: 'value',
   titleSize: '20px',
   percentSize: '30px',
