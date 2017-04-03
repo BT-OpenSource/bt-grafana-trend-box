@@ -4,7 +4,7 @@
   "id": "btplc-trend-box-panel",
 
   "info": {
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Box panel showing trends over series",
     "author": {
       "name": "BT Plc",
