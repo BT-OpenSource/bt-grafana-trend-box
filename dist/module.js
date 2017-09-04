@@ -1,9 +1,9 @@
 'use strict';
 
-System.register(['./module.css!', 'lodash', 'app/core/utils/kbn', 'app/plugins/sdk', './util/builder', './util/presenter'], function (_export, _context) {
+System.register(['./module.css!', 'lodash', 'app/core/utils/kbn', 'app/plugins/sdk', './util/builder', './util/presenter', './util/linker'], function (_export, _context) {
   "use strict";
 
-  var _, kbn, MetricsPanelCtrl, Builder, Presenter, _createClass, panelDefaults, TrendBoxCtrl;
+  var _, kbn, MetricsPanelCtrl, Builder, Presenter, Linker, _createClass, panelDefaults, TrendBoxCtrl;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -46,6 +46,8 @@ System.register(['./module.css!', 'lodash', 'app/core/utils/kbn', 'app/plugins/s
       Builder = _utilBuilder.Builder;
     }, function (_utilPresenter) {
       Presenter = _utilPresenter.Presenter;
+    }, function (_utilLinker) {
+      Linker = _utilLinker.Linker;
     }],
     execute: function () {
       _createClass = function () {
@@ -68,6 +70,7 @@ System.register(['./module.css!', 'lodash', 'app/core/utils/kbn', 'app/plugins/s
 
       panelDefaults = {
         defaultColor: 'rgb(117, 117, 117)',
+        linkIndex: 0,
         displayValue: 'value',
         titleSize: '20px',
         percentSize: '30px',
@@ -93,9 +96,9 @@ System.register(['./module.css!', 'lodash', 'app/core/utils/kbn', 'app/plugins/s
 
           _this.builder = new Builder(_this.panel);
           _this.presenter = new Presenter(_this.panel);
+          _this.linker = new Linker(_this.panel, linkSrv);
 
           _this.box = {};
-          _this.linkSrv = linkSrv;
           return _this;
         }
 
@@ -115,11 +118,11 @@ System.register(['./module.css!', 'lodash', 'app/core/utils/kbn', 'app/plugins/s
           key: 'onRender',
           value: function onRender() {
             this.box = this.builder.call(this.seriesList);
+            this.linker.call(this.box);
             this.presenter.call(this.box);
 
             this.panelContainer.css('background-color', this.box.color);
             this.panelTitle.css('font-size', this.panel.titleSize);
-            this.boxContainer.toggleClass('pointer', this.panel.links && this.panel.links.length > 0);
           }
         }, {
           key: 'onEditorSetFormat',
@@ -140,18 +143,9 @@ System.register(['./module.css!', 'lodash', 'app/core/utils/kbn', 'app/plugins/s
             this.render();
           }
         }, {
-          key: 'onClick',
-          value: function onClick() {
-            if (this.panel.links === null) return;
-            if (this.panel.links.length === 0) return;
-
-            var linkInfo = this.linkSrv.getPanelLinkAnchorInfo(this.panel.links[0], this.panel.scopedVars);
-
-            if (linkInfo.target === '_blank') {
-              window.open(linkInfo.href, '_blank');
-            } else {
-              window.location.href = '/' + linkInfo.href;
-            }
+          key: 'getLink',
+          value: function getLink() {
+            return this.panel.links[this.panel.linkIndex];
           }
         }, {
           key: 'format',
@@ -165,9 +159,7 @@ System.register(['./module.css!', 'lodash', 'app/core/utils/kbn', 'app/plugins/s
           key: 'link',
           value: function link(scope, elem, attrs, ctrl) {
             this.panelContainer = elem.find('.panel-container');
-            this.boxContainer = elem.find('.box');
             this.panelTitle = elem.find('.panel-title');
-            this.boxContainer.on('click', this.onClick.bind(this));
           }
         }]);
 

@@ -4,9 +4,11 @@ import kbn from 'app/core/utils/kbn'
 import {MetricsPanelCtrl} from 'app/plugins/sdk'
 import {Builder} from './util/builder'
 import {Presenter} from './util/presenter'
+import {Linker} from './util/linker'
 
 const panelDefaults = {
   defaultColor: 'rgb(117, 117, 117)',
+  linkIndex: 0,
   displayValue: 'value',
   titleSize: '20px',
   percentSize: '30px',
@@ -27,9 +29,9 @@ export class TrendBoxCtrl extends MetricsPanelCtrl {
 
     this.builder = new Builder(this.panel)
     this.presenter = new Presenter(this.panel)
+    this.linker = new Linker(this.panel, linkSrv)
 
     this.box = {}
-    this.linkSrv = linkSrv
   }
 
   onInitEditMode () {
@@ -44,11 +46,11 @@ export class TrendBoxCtrl extends MetricsPanelCtrl {
 
   onRender () {
     this.box = this.builder.call(this.seriesList)
+    this.linker.call(this.box)
     this.presenter.call(this.box)
 
     this.panelContainer.css('background-color', this.box.color)
     this.panelTitle.css('font-size', this.panel.titleSize)
-    this.boxContainer.toggleClass('pointer', this.panel.links && this.panel.links.length > 0)
   }
 
   onEditorSetFormat (subitem) {
@@ -66,18 +68,8 @@ export class TrendBoxCtrl extends MetricsPanelCtrl {
     this.render()
   }
 
-  onClick () {
-    if (this.panel.links === null) return
-    if (this.panel.links.length === 0) return
-
-    var linkInfo = this.linkSrv.getPanelLinkAnchorInfo(
-      this.panel.links[0], this.panel.scopedVars)
-
-    if (linkInfo.target === '_blank') {
-      window.open(linkInfo.href, '_blank')
-    } else {
-      window.location.href = '/' + linkInfo.href
-    }
+  getLink () {
+    return this.panel.links[this.panel.linkIndex]
   }
 
   format (value, format = this.panel.format) {
@@ -87,9 +79,7 @@ export class TrendBoxCtrl extends MetricsPanelCtrl {
 
   link (scope, elem, attrs, ctrl) {
     this.panelContainer = elem.find('.panel-container')
-    this.boxContainer = elem.find('.box')
     this.panelTitle = elem.find('.panel-title')
-    this.boxContainer.on('click', this.onClick.bind(this))
   }
 }
 
