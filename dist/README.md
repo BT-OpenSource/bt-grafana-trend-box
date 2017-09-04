@@ -6,12 +6,11 @@ A trend box panel for [Grafana](http://grafana.org/).
 
 ## Overview
 
-This panel shows the percentage change between the first and last values of a series. This is useful if you want to to monitor a value as it changes over time. The panel can also work with multiple series by adding together the values at each end. Options for this panel include variable font sizes, precision, units and color thresholds for the percentage change.
+This panel shows the percentage change between the first and last values of a series. This is useful if you want to to monitor a value as it changes over time. The panel can also work with multiple series by adding together the values at each end. Options for this panel include variable font sizes, precision and units; a drilldown link for the entire panel; and color thresholds for the percentage change.
 
 ## Compatibility
 
 This panel should work with the following data sources: [Graphite](https://grafana.net/plugins/graphite).
-
 
 ## Development
 
