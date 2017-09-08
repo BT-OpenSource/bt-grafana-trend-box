@@ -8,7 +8,7 @@ import {Linker} from './util/linker'
 
 const panelDefaults = {
   defaultColor: 'rgb(117, 117, 117)',
-  linkIndex: 0,
+  linkIndex: '0',
   displayValue: 'value',
   titleSize: '20px',
   percentSize: '30px',

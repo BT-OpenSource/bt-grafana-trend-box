@@ -70,7 +70,7 @@ System.register(['./module.css!', 'lodash', 'app/core/utils/kbn', 'app/plugins/s
 
       panelDefaults = {
         defaultColor: 'rgb(117, 117, 117)',
-        linkIndex: 0,
+        linkIndex: '0',
         displayValue: 'value',
         titleSize: '20px',
         percentSize: '30px',
