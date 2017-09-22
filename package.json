@@ -17,12 +17,11 @@
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-eslint": "^20.1.0",
+    "grunt-exec": "^3.0.0",
     "jasmine": "^2.8.0",
     "load-grunt-tasks": "^3.5.2"
   },
   "dependencies": {
-    "grunt-exec": "^3.0.0",
-    "lodash": "^4.15.0",
-    "moment": "^2.13.0"
+    "lodash": "^4.15.0"
   }
 }
