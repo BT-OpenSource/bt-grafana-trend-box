@@ -11,7 +11,7 @@ module.exports = function(grunt) {
         src: ['**/*', '!**/*.scss'],
         dest: 'dist'
       },
-      readme: {
+      meta: {
         expand: true,
         src: ['README.md'],
         dest: 'dist'
@@ -52,6 +52,6 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('test', 'exec:jasmine')
-  grunt.registerTask('build', ['clean', 'copy:src', 'copy:readme', 'babel'])
+  grunt.registerTask('build', ['clean', 'copy:src', 'copy:meta', 'babel'])
   grunt.registerTask('default', ['eslint', 'test', 'build'])
 };
