@@ -23,6 +23,10 @@ var _presenter = require('./util/presenter');
 
 var _linker = require('./util/linker');
 
+var _formatter = require('./util/formatter');
+
+var _styler = require('./util/styler');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -43,7 +47,7 @@ var panelDefaults = {
   decimals: 2
 };
 
-var TrendBoxCtrl = function (_MetricsPanelCtrl) {
+var TrendBoxCtrl = exports.TrendBoxCtrl = function (_MetricsPanelCtrl) {
   _inherits(TrendBoxCtrl, _MetricsPanelCtrl);
 
   function TrendBoxCtrl($scope, $injector, linkSrv) {
@@ -60,6 +64,8 @@ var TrendBoxCtrl = function (_MetricsPanelCtrl) {
     _this.builder = new _builder.Builder(_this.panel);
     _this.presenter = new _presenter.Presenter(_this.panel);
     _this.linker = new _linker.Linker(_this.panel, linkSrv);
+    _this.formatter = new _formatter.Formatter(_this.panel, _kbn2.default);
+    _this.styler = new _styler.Styler(_this.panel);
 
     _this.box = {};
     return _this;
@@ -83,6 +89,8 @@ var TrendBoxCtrl = function (_MetricsPanelCtrl) {
       this.box = this.builder.call(this.seriesList);
       this.linker.call(this.box);
       this.presenter.call(this.box);
+      this.formatter.call(this.box);
+      this.styler.call(this.box);
 
       this.panelContainer.css('background-color', this.box.color);
       this.panelTitle.css('font-size', this.panel.titleSize);
@@ -106,19 +114,6 @@ var TrendBoxCtrl = function (_MetricsPanelCtrl) {
       this.render();
     }
   }, {
-    key: 'getLink',
-    value: function getLink() {
-      return this.panel.links[this.panel.linkIndex];
-    }
-  }, {
-    key: 'format',
-    value: function format(value) {
-      var _format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.panel.format;
-
-      var formatFunc = _kbn2.default.valueFormats[_format];
-      return formatFunc(value, this.panel.decimals, null);
-    }
-  }, {
     key: 'link',
     value: function link(scope, elem, attrs, ctrl) {
       this.panelContainer = elem.find('.panel-container');
@@ -128,9 +123,6 @@ var TrendBoxCtrl = function (_MetricsPanelCtrl) {
 
   return TrendBoxCtrl;
 }(_sdk.MetricsPanelCtrl);
-
-exports.TrendBoxCtrl = TrendBoxCtrl;
-
 
 TrendBoxCtrl.templateUrl = 'module.html';
 exports.PanelCtrl = TrendBoxCtrl;

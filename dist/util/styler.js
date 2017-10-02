@@ -3,40 +3,25 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Presenter = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _lodash = require('lodash');
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var Presenter = exports.Presenter = function () {
-  function Presenter(options) {
-    _classCallCheck(this, Presenter);
+var Styler = exports.Styler = function () {
+  function Styler(options) {
+    _classCallCheck(this, Styler);
 
     this.options = options;
   }
 
-  _createClass(Presenter, [{
+  _createClass(Styler, [{
     key: 'call',
     value: function call(box) {
-      box.color = this._color(box.percent);
-    }
-  }, {
-    key: '_color',
-    value: function _color(percent) {
-      var thresholds = _lodash2.default.sortBy(this.options.thresholds, ['value']);
-      var threshold = _lodash2.default.find(_lodash2.default.reverse(thresholds), function (t) {
-        return percent >= t.value;
-      });
-      return threshold ? threshold.color : this.options.defaultColor;
+      box.percentStyle = { 'font-weight': 'bold', 'font-size': this.options.percentSize };
+      box.numberStyle = { 'font-size': this.options.numberSize };
     }
   }]);
 
-  return Presenter;
+  return Styler;
 }();

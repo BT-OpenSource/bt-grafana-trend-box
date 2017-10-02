@@ -4,6 +4,8 @@ import {MetricsPanelCtrl} from 'app/plugins/sdk'
 import {Builder} from './util/builder'
 import {Presenter} from './util/presenter'
 import {Linker} from './util/linker'
+import {Formatter} from './util/formatter'
+import {Styler} from './util/styler'
 
 const panelDefaults = {
   defaultColor: 'rgb(117, 117, 117)',
@@ -29,6 +31,8 @@ export class TrendBoxCtrl extends MetricsPanelCtrl {
     this.builder = new Builder(this.panel)
     this.presenter = new Presenter(this.panel)
     this.linker = new Linker(this.panel, linkSrv)
+    this.formatter = new Formatter(this.panel, kbn)
+    this.styler = new Styler(this.panel)
 
     this.box = {}
   }
@@ -47,6 +51,8 @@ export class TrendBoxCtrl extends MetricsPanelCtrl {
     this.box = this.builder.call(this.seriesList)
     this.linker.call(this.box)
     this.presenter.call(this.box)
+    this.formatter.call(this.box)
+    this.styler.call(this.box)
 
     this.panelContainer.css('background-color', this.box.color)
     this.panelTitle.css('font-size', this.panel.titleSize)
@@ -65,15 +71,6 @@ export class TrendBoxCtrl extends MetricsPanelCtrl {
   onEditorRemoveThreshold (index) {
     this.panel.thresholds.splice(index, 1)
     this.render()
-  }
-
-  getLink () {
-    return this.panel.links[this.panel.linkIndex]
-  }
-
-  format (value, format = this.panel.format) {
-    var formatFunc = kbn.valueFormats[format]
-    return formatFunc(value, this.panel.decimals, null)
   }
 
   link (scope, elem, attrs, ctrl) {

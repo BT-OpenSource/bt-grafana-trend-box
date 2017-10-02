@@ -6,18 +6,12 @@ export class Presenter {
   }
 
   call (box) {
-    box.percentChange = this._percentChangeFor(box)
-    box.color = this._colorFor(box.percentChange)
+    box.color = this._color(box.percent)
   }
 
-  _colorFor (percentChange) {
-    var thresholds = this.options.thresholds.concat().sort((a, b) => b.value - a.value)
-    var threshold = _.find(thresholds, (threshold) => percentChange >= threshold.value)
+  _color (percent) {
+    var thresholds = _.sortBy(this.options.thresholds, ['value'])
+    var threshold = _.find(_.reverse(thresholds), (t) => percent >= t.value)
     return threshold ? threshold.color : this.options.defaultColor
-  }
-
-  _percentChangeFor (box) {
-    var change = box.latestValue - box.oldestValue
-    return (change / box.oldestValue) * 100
   }
 }

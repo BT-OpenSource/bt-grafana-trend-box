@@ -16,10 +16,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Builder = exports.Builder = function () {
-  function Builder(options) {
+  function Builder() {
     _classCallCheck(this, Builder);
-
-    this.options = options;
   }
 
   _createClass(Builder, [{
@@ -28,32 +26,37 @@ var Builder = exports.Builder = function () {
       var seriesList = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 
       var cleanedSeries = _lodash2.default.map(seriesList, this._cleanup);
-
-      return { oldestValue: this._oldestValueFor(cleanedSeries),
-        latestValue: this._latestValueFor(cleanedSeries) };
+      var oldestValue = this._oldestValue(cleanedSeries);
+      var latestValue = this._latestValue(cleanedSeries);
+      var percent = this._change(oldestValue, latestValue);
+      return { number: latestValue || 0, percent: percent };
+    }
+  }, {
+    key: '_change',
+    value: function _change(oldestValue, latestValue) {
+      var change = latestValue - oldestValue;
+      return change / oldestValue * 100;
+    }
+  }, {
+    key: '_oldestValue',
+    value: function _oldestValue(cleanedSeries) {
+      return _lodash2.default.reduce(cleanedSeries, function (memo, points) {
+        return memo + points[0];
+      }, 0);
+    }
+  }, {
+    key: '_latestValue',
+    value: function _latestValue(cleanedSeries) {
+      return _lodash2.default.reduce(cleanedSeries, function (memo, points) {
+        return memo + points[points.length - 1];
+      }, 0);
     }
   }, {
     key: '_cleanup',
     value: function _cleanup(series) {
-      return _lodash2.default.filter(series.datapoints, function (point) {
-        return point[0] != null;
-      });
-    }
-  }, {
-    key: '_oldestValueFor',
-    value: function _oldestValueFor(cleanedSeries) {
-      return _lodash2.default.reduce(cleanedSeries, function (memo, points) {
-        var point = points[0];
-        return memo + (point ? point[0] : 0);
-      }, 0);
-    }
-  }, {
-    key: '_latestValueFor',
-    value: function _latestValueFor(cleanedSeries) {
-      return _lodash2.default.reduce(cleanedSeries, function (memo, points) {
-        var point = points[points.length - 1];
-        return memo + (point ? point[0] : 0);
-      }, 0);
+      return _lodash2.default.filter(_lodash2.default.map(series.datapoints, function (p) {
+        return p[0];
+      }));
     }
   }]);
 
