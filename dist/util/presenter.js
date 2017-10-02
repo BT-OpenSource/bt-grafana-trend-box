@@ -30,7 +30,7 @@ var Presenter = exports.Presenter = function () {
   }, {
     key: '_color',
     value: function _color(percent) {
-      var thresholds = _lodash2.default.sortBy(this.panel.thresholds, ['value']);
+      var thresholds = _lodash2.default.sortBy(this.panel.thresholds, 'value');
       var threshold = _lodash2.default.find(_lodash2.default.reverse(thresholds), function (t) {
         return percent >= t.value;
       });
