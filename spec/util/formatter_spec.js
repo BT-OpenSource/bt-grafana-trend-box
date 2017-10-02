@@ -5,11 +5,11 @@ describe('Formatter', function () {
     var panel = { format: 'custom', decimals: 2 }
     this.format = jasmine.createSpy().and.returnValue('custom')
 
-    this.kbn = { valueFormats: {
+    var kbn = { valueFormats: {
       custom: this.format, percent: function () { return '5%' }
     } }
 
-    this.subject = new Formatter(panel, this.kbn)
+    this.subject = new Formatter(panel, kbn)
     this.box = { number: 5, percent: 10 }
   })
 
