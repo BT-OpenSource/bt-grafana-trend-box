@@ -1,10 +1,10 @@
 export class Styler {
-  constructor (options) {
-    this.options = options
+  constructor (panel) {
+    this.panel = panel
   }
 
   call (box) {
-    box.percentStyle = { 'font-weight': 'bold', 'font-size': this.options.percentSize }
-    box.numberStyle = { 'font-size': this.options.numberSize }
+    box.percentStyle = { 'font-weight': 'bold', 'font-size': this.panel.percentSize }
+    box.numberStyle = { 'font-size': this.panel.numberSize }
   }
 }

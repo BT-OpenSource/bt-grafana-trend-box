@@ -9,17 +9,17 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Styler = exports.Styler = function () {
-  function Styler(options) {
+  function Styler(panel) {
     _classCallCheck(this, Styler);
 
-    this.options = options;
+    this.panel = panel;
   }
 
   _createClass(Styler, [{
     key: 'call',
     value: function call(box) {
-      box.percentStyle = { 'font-weight': 'bold', 'font-size': this.options.percentSize };
-      box.numberStyle = { 'font-size': this.options.numberSize };
+      box.percentStyle = { 'font-weight': 'bold', 'font-size': this.panel.percentSize };
+      box.numberStyle = { 'font-size': this.panel.numberSize };
     }
   }]);
 

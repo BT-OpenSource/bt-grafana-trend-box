@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -17,8 +17,14 @@ var Linker = exports.Linker = function () {
   }
 
   _createClass(Linker, [{
-    key: "call",
+    key: 'call',
     value: function call(box) {
+      this._evaluateLink(box, this);
+      this._cleanupLink(box, this);
+    }
+  }, {
+    key: '_evaluateLink',
+    value: function _evaluateLink(box) {
       var _linkSrv;
 
       var links = this.panel.links || [];
@@ -28,6 +34,15 @@ var Linker = exports.Linker = function () {
 
       var args = [linkInfo, this.panel.scopedVars];
       box.link = (_linkSrv = this.linkSrv).getPanelLinkAnchorInfo.apply(_linkSrv, args);
+    }
+  }, {
+    key: '_cleanupLink',
+    value: function _cleanupLink(box) {
+      if (box.link === undefined) return;
+
+      if (box.link.href.indexOf('http') === -1) {
+        box.link.href = '/' + box.link.href;
+      }
     }
   }]);
 

@@ -2,14 +2,14 @@ import {Formatter} from '../../src/util/formatter'
 
 describe('Formatter', function () {
   beforeEach(function () {
-    var options = { format: 'custom', decimals: 2 }
+    var panel = { format: 'custom', decimals: 2 }
     this.format = jasmine.createSpy().and.returnValue('custom')
 
     this.kbn = { valueFormats: {
       custom: this.format, percent: function () { return '5%' }
     } }
 
-    this.subject = new Formatter(options, this.kbn)
+    this.subject = new Formatter(panel, this.kbn)
     this.box = { number: 5, percent: 10 }
   })
 

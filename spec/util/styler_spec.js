@@ -2,9 +2,9 @@ import {Styler} from '../../src/util/styler'
 
 describe('Styler', function () {
   beforeEach(function () {
-    var options = { percentSize: 1, numberSize: 1 }
+    var panel = { percentSize: 1, numberSize: 1 }
     this.box = { }
-    this.subject = new Styler(options)
+    this.subject = new Styler(panel)
   })
 
   describe('call', function () {

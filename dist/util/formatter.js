@@ -9,10 +9,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Formatter = exports.Formatter = function () {
-  function Formatter(options, kbn) {
+  function Formatter(panel, kbn) {
     _classCallCheck(this, Formatter);
 
-    this.options = options;
+    this.panel = panel;
     this.kbn = kbn;
   }
 
@@ -20,13 +20,13 @@ var Formatter = exports.Formatter = function () {
     key: 'call',
     value: function call(box) {
       box.percent = this._format(box.percent, 'percent');
-      box.number = this._format(box.number, this.options.format);
+      box.number = this._format(box.number, this.panel.format);
     }
   }, {
     key: '_format',
     value: function _format(value, format) {
       var formatFunc = this.kbn.valueFormats[format];
-      return formatFunc(value, this.options.decimals, null);
+      return formatFunc(value, this.panel.decimals, null);
     }
   }]);
 
