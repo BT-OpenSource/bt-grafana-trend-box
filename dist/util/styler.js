@@ -17,9 +17,22 @@ var Styler = exports.Styler = function () {
 
   _createClass(Styler, [{
     key: 'call',
-    value: function call(box) {
-      box.percentStyle = { 'font-weight': 'bold', 'font-size': this.panel.percentSize };
-      box.numberStyle = { 'font-size': this.panel.numberSize };
+    value: function call(box, container, title) {
+      container.css('background-color', box.color);
+      title.css('font-size', this.panel.titleSize);
+
+      box.percentStyle = this._percentStyle();
+      box.numberStyle = this._numberStyle();
+    }
+  }, {
+    key: '_percentStyle',
+    value: function _percentStyle() {
+      return { 'font-weight': 'bold', 'font-size': this.panel.percentSize };
+    }
+  }, {
+    key: '_numberStyle',
+    value: function _numberStyle() {
+      return { 'font-size': this.panel.numberSize };
     }
   }]);
 
