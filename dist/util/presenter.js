@@ -30,11 +30,20 @@ var Presenter = exports.Presenter = function () {
   }, {
     key: '_color',
     value: function _color(percent) {
-      var thresholds = _lodash2.default.sortBy(this.panel.thresholds, 'value');
-      var threshold = _lodash2.default.find(_lodash2.default.reverse(thresholds), function (t) {
-        return percent >= t.value;
+      var _this = this;
+
+      var ts = _lodash2.default.sortBy(this.panel.thresholds, function (t) {
+        return _this._value(t);
+      });
+      var threshold = _lodash2.default.find(_lodash2.default.reverse(ts), function (t) {
+        return percent >= _this._value(t);
       });
       return threshold ? threshold.color : this.panel.defaultColor;
+    }
+  }, {
+    key: '_value',
+    value: function _value(threshold) {
+      return parseFloat(threshold.value);
     }
   }]);
 

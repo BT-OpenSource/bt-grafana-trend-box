@@ -10,8 +10,12 @@ export class Presenter {
   }
 
   _color (percent) {
-    var thresholds = _.sortBy(this.panel.thresholds, 'value')
-    var threshold = _.find(_.reverse(thresholds), (t) => percent >= t.value)
+    var ts = _.sortBy(this.panel.thresholds, t => this._value(t))
+    var threshold = _.find(_.reverse(ts), t => percent >= this._value(t))
     return threshold ? threshold.color : this.panel.defaultColor
+  }
+
+  _value (threshold) {
+    return parseFloat(threshold.value)
   }
 }
