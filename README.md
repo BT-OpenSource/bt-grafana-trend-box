@@ -2,7 +2,7 @@
 
 A trend box panel for [Grafana](http://grafana.org/).
 
-![Trend Box Panel](https://raw.githubusercontent.com/BTplc/grafana-trend-box/master/src/img/trend_box.png)
+![Trend Box Panel](https://raw.githubusercontent.com/BT-OpenSource/bt-grafana-trend-box/master/src/img/trend_box.png)
 
 ## Overview
 
