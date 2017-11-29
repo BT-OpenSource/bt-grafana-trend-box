@@ -19,7 +19,7 @@ const panelDefaults = {
   decimals: 2
 }
 
-export class TrendBoxCtrl extends MetricsPanelCtrl {
+export class PanelCtrl extends MetricsPanelCtrl {
   constructor ($scope, $injector, linkSrv) {
     super($scope, $injector)
     _.defaults(this.panel, panelDefaults)
@@ -76,5 +76,4 @@ export class TrendBoxCtrl extends MetricsPanelCtrl {
   }
 }
 
-TrendBoxCtrl.templateUrl = 'module.html'
-export { TrendBoxCtrl as PanelCtrl }
+PanelCtrl.templateUrl = 'module.html'

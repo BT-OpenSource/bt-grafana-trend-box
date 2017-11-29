@@ -1,28 +1,32 @@
 import {Formatter} from '../../src/util/formatter'
 
-describe('Formatter', function () {
-  beforeEach(function () {
-    var panel = { format: 'custom', decimals: 2 }
-    this.format = jasmine.createSpy().and.returnValue('custom')
+describe('Formatter', () => {
+  let subject
+  let format
+  let box
 
-    var kbn = { valueFormats: {
-      custom: this.format, percent: function () { return '5%' }
+  beforeEach(() => {
+    let panel = { format: 'custom', decimals: 2 }
+    format = jasmine.createSpy().and.returnValue('custom')
+
+    let kbn = { valueFormats: {
+      custom: format, percent: () => { return '5%' }
     } }
 
-    this.subject = new Formatter(panel, kbn)
-    this.box = { number: 5, percent: 10 }
+    subject = new Formatter(panel, kbn)
+    box = { number: 5, percent: 10 }
   })
 
-  describe('call', function () {
-    it('formats the percent as a percentage', function () {
-      this.subject.call(this.box)
-      expect(this.box.percent).toEqual('5%')
+  describe('call', () => {
+    it('formats the percent as a percentage', () => {
+      subject.call(box)
+      expect(box.percent).toEqual('5%')
     })
 
-    it('formats the number with a given format', function () {
-      this.subject.call(this.box)
-      expect(this.box.number).toEqual('custom')
-      expect(this.format).toHaveBeenCalledWith(5, 2, null)
+    it('formats the number with a given format', () => {
+      subject.call(box)
+      expect(box.number).toEqual('custom')
+      expect(format).toHaveBeenCalledWith(5, 2, null)
     })
   })
 })
