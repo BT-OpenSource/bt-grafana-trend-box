@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.PanelCtrl = exports.TrendBoxCtrl = undefined;
+exports.PanelCtrl = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -47,13 +47,13 @@ var panelDefaults = {
   decimals: 2
 };
 
-var TrendBoxCtrl = exports.TrendBoxCtrl = function (_MetricsPanelCtrl) {
-  _inherits(TrendBoxCtrl, _MetricsPanelCtrl);
+var PanelCtrl = exports.PanelCtrl = function (_MetricsPanelCtrl) {
+  _inherits(PanelCtrl, _MetricsPanelCtrl);
 
-  function TrendBoxCtrl($scope, $injector, linkSrv) {
-    _classCallCheck(this, TrendBoxCtrl);
+  function PanelCtrl($scope, $injector, linkSrv) {
+    _classCallCheck(this, PanelCtrl);
 
-    var _this = _possibleConstructorReturn(this, (TrendBoxCtrl.__proto__ || Object.getPrototypeOf(TrendBoxCtrl)).call(this, $scope, $injector));
+    var _this = _possibleConstructorReturn(this, (PanelCtrl.__proto__ || Object.getPrototypeOf(PanelCtrl)).call(this, $scope, $injector));
 
     _lodash2.default.defaults(_this.panel, panelDefaults);
 
@@ -71,7 +71,7 @@ var TrendBoxCtrl = exports.TrendBoxCtrl = function (_MetricsPanelCtrl) {
     return _this;
   }
 
-  _createClass(TrendBoxCtrl, [{
+  _createClass(PanelCtrl, [{
     key: 'onInitEditMode',
     value: function onInitEditMode() {
       this.addEditorTab('Options', 'public/plugins/btplc-trend-box-panel/editor.html');
@@ -118,8 +118,7 @@ var TrendBoxCtrl = exports.TrendBoxCtrl = function (_MetricsPanelCtrl) {
     }
   }]);
 
-  return TrendBoxCtrl;
+  return PanelCtrl;
 }(_sdk.MetricsPanelCtrl);
 
-TrendBoxCtrl.templateUrl = 'module.html';
-exports.PanelCtrl = TrendBoxCtrl;
+PanelCtrl.templateUrl = 'module.html';
