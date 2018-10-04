@@ -52,7 +52,7 @@ export class PanelCtrl extends MetricsPanelCtrl {
     this.linker.call(this.box)
     this.presenter.call(this.box)
     this.formatter.call(this.box)
-    this.styler.call(this.box, this.container, this.title)
+    this.styler.call(this.box, this.container, this.title, this.header, this.menu)
   }
 
   onEditorSetFormat (subitem) {
@@ -73,6 +73,8 @@ export class PanelCtrl extends MetricsPanelCtrl {
   link (scope, elem, attrs, ctrl) {
     this.container = elem.find('.panel-container')
     this.title = elem.find('.panel-title')
+    this.header = elem.find('.panel-header')
+    this.menu = elem.find('.dropdown-menu')
   }
 }
 

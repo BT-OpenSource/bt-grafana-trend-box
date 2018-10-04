@@ -3,9 +3,11 @@ export class Styler {
     this.panel = panel
   }
 
-  call (box, container, title) {
+  call (box, container, title, header, menu) {
     container.css('background-color', box.color)
     title.css('font-size', this.panel.titleSize)
+    header.css('max-height', '27px')
+    menu.css('font-size', '13px')
 
     box.percentStyle = this._percentStyle()
     box.numberStyle = this._numberStyle()
