@@ -6,6 +6,8 @@ export class Formatter {
 
   call (box) {
     box.percent = this._format(box.percent, 'percent')
+    box.float = parseFloat(box.percent.replace('%', ''))
+    if (box.float > 0) { box.arrow = '▲' } else { box.arrow = '▼' }
     box.number = this._format(box.number, this.panel.format)
   }
 
